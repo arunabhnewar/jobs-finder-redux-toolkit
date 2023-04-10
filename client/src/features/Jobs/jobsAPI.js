@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from "../../utilities/axios";
 
 // Get the job
 export const getJobs = async () => {
-    const response = await axios.get('/jobs');
+    const response = await axios.get(`/jobs`);
 
     return response.data;
 };
@@ -10,7 +10,7 @@ export const getJobs = async () => {
 
 // Add a job
 export const addJob = async (data) => {
-    const response = await axios.post('/jobs', data);
+    const response = await axios.post(`/jobs`, data);
 
     return response.data;
 };

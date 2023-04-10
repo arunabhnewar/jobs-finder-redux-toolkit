@@ -1,24 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const SingleJob = () => {
+const SingleJob = ({ job }) => {
+  // destructure the job
+  const { title, type, salary, deadline, id } = job || {};
+
   return (
     <div className='lws-single-job'>
       <div className='flex-1 min-w-0'>
-        <h2 className='lws-title'>Back End Developer</h2>
+        <h2 className='lws-title'>{title} </h2>
         <div className='job-footers'>
           <div className='lws-type'>
             {/* <!-- Fulltime - #FF8A00,  --><!-- Internship - #FF5757,  --><!-- Remote - #56E5C4,  --> */}
             <i className='fa-solid fa-stop !text-[#FF8A00] text-lg mr-1.5'></i>
-            Full-time
+            {type}
           </div>
           <div className='lws-salary'>
             <i className='fa-solid fa-bangladeshi-taka-sign text-slate-400 text-lg mr-1.5'></i>
-            BDT 40,000
+            {salary}
           </div>
           <div className='lws-deadline'>
             <i className='fa-regular fa-calendar text-slate-400 text-lg mr-1.5'></i>
-            Closing on 2022-12-31
+            {deadline}
           </div>
         </div>
       </div>
