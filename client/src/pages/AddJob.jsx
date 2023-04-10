@@ -22,7 +22,7 @@ const AddJob = () => {
       createJob({
         title,
         type,
-        salary: Number(salary),
+        salary: salary,
         deadline,
       })
     );
@@ -36,8 +36,6 @@ const AddJob = () => {
     setSalary("");
     setDeadline("");
   };
-
-  // onSubmit={addNewJobHandler}
 
   return (
     <div className='lg:pl-[14rem] mt-[5.8125rem]'>

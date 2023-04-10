@@ -1,9 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { editActiveJob } from "../../features/Jobs/jobsSlice";
 
 const SingleJob = ({ job }) => {
+  // dispatch
+  const dispatch = useDispatch();
+
+  // navigate
+  const navigate = useNavigate();
+
   // destructure the job
   const { title, type, salary, deadline, id } = job || {};
+
+  // edit a job
+  const editJobHandler = () => {
+    dispatch(editActiveJob(job));
+    navigate(`/editjob`);
+  };
 
   return (
     <div className='lws-single-job'>
@@ -27,12 +41,13 @@ const SingleJob = ({ job }) => {
       </div>
       <div className='mt-5 flex lg:mt-0 lg:ml-4'>
         <span className='hidden sm:block'>
-          <Link to='/editjob'>
-            <button type='button' className='lws-edit btn btn-primary'>
-              <i className='fa-solid fa-pen text-gray-300 -ml-1 mr-2'></i>
-              Edit
-            </button>
-          </Link>
+          <button
+            onClick={editJobHandler}
+            type='button'
+            className='lws-edit btn btn-primary'>
+            <i className='fa-solid fa-pen text-gray-300 -ml-1 mr-2'></i>
+            Edit
+          </button>
         </span>
 
         <span className='sm:ml-3'>
