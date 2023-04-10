@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { editActiveJob } from "../../features/Jobs/jobsSlice";
+import { editActiveJob, removeJob } from "../../features/Jobs/jobsSlice";
 
 const SingleJob = ({ job }) => {
   // dispatch
@@ -17,6 +17,11 @@ const SingleJob = ({ job }) => {
   const editJobHandler = () => {
     dispatch(editActiveJob(job));
     navigate(`/editjob`);
+  };
+
+  // Job Delete handler
+  const deleteJobHandler = () => {
+    dispatch(removeJob(id));
   };
 
   return (
@@ -51,7 +56,10 @@ const SingleJob = ({ job }) => {
         </span>
 
         <span className='sm:ml-3'>
-          <button type='button' className='lws-delete btn btn-danger '>
+          <button
+            onClick={deleteJobHandler}
+            type='button'
+            className='lws-delete btn btn-danger '>
             <i className='fa-solid fa-trash text-gray-300 -ml-1 mr-2'></i>
             Delete
           </button>

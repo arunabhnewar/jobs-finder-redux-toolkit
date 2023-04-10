@@ -116,8 +116,7 @@ const JobsSlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
 
-                const indexToDelete = state.jobs.findIndex((job) => job.id === action.payload.id);
-                state.jobs[indexToDelete] = action.payload;
+                state.jobs = state.jobs.filter((job) => job.id !== action.meta.arg);
             })
             .addCase(removeJob.rejected, (state, action) => {
                 state.isLoading = false;

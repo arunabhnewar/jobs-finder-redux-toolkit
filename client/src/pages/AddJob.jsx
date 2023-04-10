@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createJob } from "../features/Jobs/jobsSlice";
 
 const AddJob = () => {
@@ -8,6 +9,9 @@ const AddJob = () => {
 
   // dispatch
   const dispatch = useDispatch();
+
+  // Navigation
+  const navigate = useNavigate();
 
   // useState
   const [title, setTitle] = useState("");
@@ -27,6 +31,7 @@ const AddJob = () => {
       })
     );
     resetHandler();
+    navigate("/");
   };
 
   // reset handler
