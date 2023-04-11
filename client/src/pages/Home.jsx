@@ -6,9 +6,8 @@ import { fetchJobs } from "../features/Jobs/jobsSlice";
 
 const Home = () => {
   // use Selector
-  const { jobs, isLoading, isError, error, editing } = useSelector(
-    state => state.jobs
-  );
+  const { jobs, isLoading, isError, error } = useSelector(state => state.jobs);
+  const { type, salaryType, search } = useSelector(state => state.filterJob);
 
   // dispatch
   const dispatch = useDispatch();
@@ -21,15 +20,39 @@ const Home = () => {
   let content = null;
   if (isLoading) content = <p>Loading...</p>;
 
-  if (!isLoading && isError)
-    content = <p className='error'>There was an error occurred</p>;
+  if (!isLoading && isError) content = <p className='error'>{error}</p>;
 
   if (!isLoading && !isError && jobs?.length === 0) {
     content = <p>No jobs found!</p>;
   }
 
   if (!isLoading && !isError && jobs?.length > 0) {
-    content = jobs.map(job => <SingleJob key={job.id} job={job} />);
+    content = jobs
+      .filter(job => {
+        if (type === "Internship") {
+          return job.type === "Internship";
+        }
+        if (type === "Full Time") {
+          return job.type === "Full Time";
+        }
+        if (type === "Remote") {
+          return job.type === "Remote";
+        }
+        return true;
+      })
+      .sort((a, b) => {
+        if (salaryType === "ascending") {
+          return a.salary - b.salary;
+        } else {
+          return b.salary - a.salary;
+        }
+      })
+      .filter(job => {
+        if (job.title.toLowerCase().includes(search)) {
+          return true;
+        }
+      })
+      .map(job => <SingleJob key={job.id} job={job} />);
   }
 
   return (
