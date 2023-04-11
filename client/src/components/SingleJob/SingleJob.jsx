@@ -31,16 +31,25 @@ const SingleJob = ({ job }) => {
         <div className='job-footers'>
           <div className='lws-type'>
             {/* <!-- Fulltime - #FF8A00,  --><!-- Internship - #FF5757,  --><!-- Remote - #56E5C4,  --> */}
-            <i className='fa-solid fa-stop !text-[#FF8A00] text-lg mr-1.5'></i>
+            <i
+              className={`fa-solid fa-stop text-lg mr-1.5 !text-[${
+                type === "Internship"
+                  ? "#FF5757"
+                  : type === "Remote"
+                  ? "#56E5C4"
+                  : type === "Full Time"
+                  ? "#FF8A00"
+                  : null
+              }]`}></i>
             {type}
           </div>
           <div className='lws-salary'>
             <i className='fa-solid fa-bangladeshi-taka-sign text-slate-400 text-lg mr-1.5'></i>
-            {salary}
+            BDT {salary}
           </div>
           <div className='lws-deadline'>
             <i className='fa-regular fa-calendar text-slate-400 text-lg mr-1.5'></i>
-            {deadline}
+            Closing on {deadline}
           </div>
         </div>
       </div>
